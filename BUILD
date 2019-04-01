@@ -13,5 +13,6 @@ sh_binary(
         "//tensorflow_addons/optimizers",
         "//tensorflow_addons/seq2seq",
         "//tensorflow_addons/text",
+        "//tensorflow_addons/crf"
     ],
 )
