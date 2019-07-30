@@ -10,6 +10,7 @@ py_library(
         "f_scores.py",
         "r_square.py",
         "utils.py",
+        "crf_accuracy.py"
     ],
     srcs_version = "PY2AND3",
     deps = [
