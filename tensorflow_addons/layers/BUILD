@@ -6,6 +6,7 @@ py_library(
     name = "layers",
     srcs = [
         "__init__.py",
+        "crf.py",
         "gelu.py",
         "maxout.py",
         "normalizations.py",
@@ -20,6 +21,7 @@ py_library(
     srcs_version = "PY2AND3",
     deps = [
         "//tensorflow_addons/activations",
+        "//tensorflow_addons/text",
         "//tensorflow_addons/utils",
     ],
 )
@@ -96,6 +98,19 @@ py_test(
         "optical_flow_test.py",
     ],
     main = "optical_flow_test.py",
+    srcs_version = "PY2AND3",
+    deps = [
+        ":layers",
+    ],
+)
+
+py_test(
+    name = "crf_test",
+    size = "small",
+    srcs = [
+        "crf_test.py",
+    ],
+    main = "crf_test.py",
     srcs_version = "PY2AND3",
     deps = [
         ":layers",

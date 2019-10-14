@@ -12,18 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Additional layers that conform to Keras API."""
+"""Implementing Conditional Random Field loss."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_addons.layers.gelu import GeLU
-from tensorflow_addons.layers.maxout import Maxout
-from tensorflow_addons.layers.normalizations import GroupNormalization
-from tensorflow_addons.layers.normalizations import InstanceNormalization
-from tensorflow_addons.layers.optical_flow import CorrelationCost
-from tensorflow_addons.layers.poincare import PoincareNormalize
-from tensorflow_addons.layers.sparsemax import Sparsemax
-from tensorflow_addons.layers.wrappers import WeightNormalization
+import tensorflow as tf
+
 from tensorflow_addons.layers.crf import CRF
+from tensorflow_addons.utils import keras_utils
+
+
+@keras_utils.register_keras_custom_object
+class ConditionalRandomFieldLoss(object):
+    def get_config(self):
+        return {}
+
+    def __call__(self, y_true, y_pred, sample_weight=None):
+        crf_layer = y_pred._keras_history[0]
+
+        # check if last layer is CRF
+        if not isinstance(crf_layer, CRF):
+            raise ValueError('Last layer must be CRF for use {}.'.format(
+                self.__class__.__name__))
+
+        loss_vector = crf_layer.get_loss(y_true, y_pred)
+
+        return tf.keras.backend.mean(loss_vector)

@@ -9,6 +9,8 @@
 | npairs | @WindQAQ | windqaq@gmail.com |
 | sparsemax_loss | @AndreasMadsen | amwwebdk+github@gmail.com |
 | triplet |   |  |
+| crf | @howl-anderson | u1mail2me@gmail.com |
+
 
 ## Components
 | Submodule | Loss  | Reference               |
@@ -20,6 +22,7 @@
 | npairs | NpairsMultilabelLoss | http://www.nec-labs.com/uploads/images/Department-Images/MediaAnalytics/papers/nips16_npairmetriclearning.pdf |
 | sparsemax_loss | SparsemaxLoss |  https://arxiv.org/abs/1602.02068 |
 | triplet | TripletSemiHardLoss | https://arxiv.org/abs/1503.03832       |
+| crf_loss | ConditionalRandomFieldLoss | https://en.wikipedia.org/wiki/Conditional_random_field |
 
 
 ## Contribution Guidelines

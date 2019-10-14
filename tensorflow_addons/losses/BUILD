@@ -7,6 +7,7 @@ py_library(
     srcs = [
         "__init__.py",
         "contrastive.py",
+        "crf_loss.py",
         "focal_loss.py",
         "lifted.py",
         "metric_learning.py",
@@ -17,6 +18,7 @@ py_library(
     srcs_version = "PY2AND3",
     deps = [
         "//tensorflow_addons/activations",
+        "//tensorflow_addons/layers",
         "//tensorflow_addons/utils",
     ],
 )
@@ -109,5 +111,19 @@ py_test(
     srcs_version = "PY2AND3",
     deps = [
         ":losses",
+    ],
+)
+
+py_test(
+    name = "crf_loss_test",
+    size = "small",
+    srcs = [
+        "crf_loss_test.py",
+    ],
+    main = "crf_loss_test.py",
+    srcs_version = "PY2AND3",
+    deps = [
+        ":losses",
+        "//tensorflow_addons/layers",
     ],
 )
