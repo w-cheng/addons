@@ -293,7 +293,7 @@ class CRF(tf.keras.layers.Layer):
     def mask_to_sequence_length(self, mask):
         """compute sequence length from mask."""
         sequence_length = tf.keras.backend.cast(
-            tf.keras.backend.sum(mask, 1), tf.int64)
+            tf.keras.backend.sum(tf.dtypes.cast(mask, tf.int8), 1), tf.int64)
         return sequence_length
 
     @staticmethod
@@ -332,7 +332,7 @@ class CRF(tf.keras.layers.Layer):
             axis=1)
 
         # 0011100 > 0001110 => 0010000
-        left_boundary = tf.keras.backend.greater(mask, right_shifted_mask)
+        left_boundary = tf.keras.backend.greater(tf.dtypes.cast(mask, tf.int8), tf.dtypes.cast(right_shifted_mask, tf.int8))
 
         return left_boundary
 
